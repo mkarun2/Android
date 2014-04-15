@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 
 import com.ids.coursetracker.R;
-import com.ids.database.DAO.UsersDAO;
+import com.ids.database.dao.UsersDAO;
 import com.ids.database.model.Users;
 
 public class MainActivity extends Activity {

@@ -1,4 +1,4 @@
-package com.ids.database.DAO;
+package com.ids.database.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
