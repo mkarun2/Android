@@ -24,10 +24,10 @@ public class MainActivity extends Activity {
 		
 		Users userObj = new Users("Mohanakrishnakumar","Karunakaran","AVM","High School","Enjoyed");
 		
-		if(users_datasource.insertUser(userObj) == -1)
-			Log.e(LOG, "Insert Failed");
+		if(users_datasource.deleteStudent(4) <= 0)
+			Log.e(LOG, "Delete Failed");
 		else
-			Log.e(LOG, "Insert Success");
+			Log.e(LOG, "Delete Success");
 		
 		users_datasource.close();		
 	}
