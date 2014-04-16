@@ -1,14 +1,21 @@
 package com.ids.database.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.ids.database.helper.DatabaseHelper;
 import com.ids.database.model.Users;
 
 public  class UsersDAO {
+	//logger
+	private static final String LOG = "UsersDAO";
 	
 	// Table Name
 	public static final String TABLE_USERS = "users";
@@ -70,4 +77,66 @@ public  class UsersDAO {
         if(student_id == null) return false;
         else return true;
 	}
+	
+	//update
+	
+	//delete
+	
+	/*
+	 * Method to retrieve all the students.
+	 * This method returns a list of student objects
+	 * or else null. So check for null condition when 
+	 * using this method
+	 */
+	public List<Users> getAllToDos() {
+        List<Users> studentList = null;
+        String selectQuery = "SELECT  * FROM " + TABLE_USERS; 
+        Log.e(LOG, selectQuery); 
+        Cursor c = database.rawQuery(selectQuery, null);
+        
+        if(c == null) return null;
+        
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+        	studentList = new ArrayList<Users>();
+            do {
+            	Users student = new Users();
+    	        student.setStudent_id(c.getInt(c.getColumnIndex(KEY_STUDENT_ID)));
+    	        student.setFirst_name(c.getString(c.getColumnIndex(KEY_FIRST_NAME)));
+    	        student.setLast_name(c.getString(c.getColumnIndex(KEY_LAST_NAME)));
+    	        student.setSchool_name(c.getString(c.getColumnIndex(KEY_SCHOOL_NAME)));
+    	        student.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
+    	        student.setOther(c.getString(c.getColumnIndex(KEY_OTHER)));
+ 
+                // adding to student list
+                studentList.add(student);
+            } while (c.moveToNext());
+        } 
+        return studentList;
+    }
+	
+	/*
+	 * Get a student object given a student ID
+	 * If a student id is not present, null is returned, so when using this method,
+	 * check for null condition before using the object.
+	 * This method uses the raw query feature
+	 */
+	public Users getTodo(Integer student_id) {
+		if(student_id == null) return null;		
+        String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE " + KEY_STUDENT_ID + " = " + student_id; 
+        Log.e(LOG, selectQuery); 
+        Cursor c = database.rawQuery(selectQuery, null); 
+        Users student = null;
+        if (c != null){
+            c.moveToFirst();  
+            student = new Users();
+	        student.setStudent_id(c.getInt(c.getColumnIndex(KEY_STUDENT_ID)));
+	        student.setFirst_name(c.getString(c.getColumnIndex(KEY_FIRST_NAME)));
+	        student.setLast_name(c.getString(c.getColumnIndex(KEY_LAST_NAME)));
+	        student.setSchool_name(c.getString(c.getColumnIndex(KEY_SCHOOL_NAME)));
+	        student.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
+	        student.setOther(c.getString(c.getColumnIndex(KEY_OTHER)));
+        }   
+        return student;
+    }
 }
