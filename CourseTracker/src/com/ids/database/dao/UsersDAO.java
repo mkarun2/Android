@@ -61,8 +61,8 @@ public  class UsersDAO {
 								");";
 	
 	// insert a user given a users object
-	public final boolean insertUser(Users userObj){
-		if(userObj == null) return false;
+	public  long insertUser(Users userObj){
+		if(userObj == null) return (long) -1;
 				
 		ContentValues values = new ContentValues();
         values.put(KEY_FIRST_NAME, userObj.getFirst_name());
@@ -72,15 +72,50 @@ public  class UsersDAO {
         values.put(KEY_OTHER, userObj.getOther());
 		       
         // insert row
-        Long student_id = database.insert(TABLE_USERS, null, values);
-        
-        if(student_id == null) return false;
-        else return true;
+        return database.insert(TABLE_USERS, null, values);
 	}
 	
-	//update
+	/*
+	 * This method is used to update the student entity
+	 * given a student object. 
+	 * Returns either 0 or num of rows updated indicating
+	 * success or failure.
+	 * So, when using this method, success or
+	 * failure check have to be mentioned.
+	 */
+	public int updateStudent(Users userObj) {
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_FIRST_NAME, userObj.getFirst_name());
+        values.put(KEY_LAST_NAME, userObj.getLast_name());
+        values.put(KEY_SCHOOL_NAME, userObj.getSchool_name());
+        values.put(KEY_DESCRIPTION, userObj.getDescription());
+        values.put(KEY_OTHER, userObj.getOther());
+
+		// updating row
+		return database.update(TABLE_USERS, values, KEY_STUDENT_ID + " = ?",new String[] { String.valueOf(userObj.getStudent_id()) });
+	}
 	
-	//delete
+	/*
+	 * Delete all students
+	 * returns the number of rows deleted 
+	 */
+	public int deleteAllStudents() {				
+		return database.delete(TABLE_USERS,"1",null);
+    }
+	
+	/*
+	 * Delete a student.
+	 * return -1 for error,
+	 * 0 - no rows deleted
+	 * > 0 - num of rows deleted
+	 */
+	public int deleteStudent(Integer student_id) {		
+		if(student_id == null) return -1;
+		
+		return database.delete(TABLE_USERS, KEY_STUDENT_ID + " = ?",
+                new String[] { String.valueOf(student_id) });
+    }
 	
 	/*
 	 * Method to retrieve all the students.
@@ -88,7 +123,7 @@ public  class UsersDAO {
 	 * or else null. So check for null condition when 
 	 * using this method
 	 */
-	public List<Users> getAllToDos() {
+	public List<Users> getAllStudents() {
         List<Users> studentList = null;
         String selectQuery = "SELECT  * FROM " + TABLE_USERS; 
         Log.e(LOG, selectQuery); 
@@ -121,7 +156,7 @@ public  class UsersDAO {
 	 * check for null condition before using the object.
 	 * This method uses the raw query feature
 	 */
-	public Users getTodo(Integer student_id) {
+	public Users getStudent(Integer student_id) {
 		if(student_id == null) return null;		
         String selectQuery = "SELECT  * FROM " + TABLE_USERS + " WHERE " + KEY_STUDENT_ID + " = " + student_id; 
         Log.e(LOG, selectQuery); 
@@ -139,4 +174,5 @@ public  class UsersDAO {
         }   
         return student;
     }
+	
 }
