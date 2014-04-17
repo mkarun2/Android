@@ -8,7 +8,7 @@ import com.ids.database.helper.DatabaseHelper;
 
 public class InstructorsDAO {
 	// Table Name
-	public static final String TABLE_USERS = "instructors";
+	public static final String TABLE_INSTRUCTORS = "instructors";
 
 	// Database handle
 	private SQLiteDatabase database;
@@ -30,4 +30,10 @@ public class InstructorsDAO {
 	public void close() {
 		dbHelper.close();
 	}
+	
+	// inserting an instructor goes in addition to adding a record in
+	// the officehours table
+	// The type field in the instructor, defines whether
+	// it is an instructor or a TA
+	
 }
