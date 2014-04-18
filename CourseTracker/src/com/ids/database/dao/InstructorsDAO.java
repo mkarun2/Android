@@ -31,6 +31,23 @@ public class InstructorsDAO {
 		dbHelper.close();
 	}
 	
+	
+	public static final String KEY_INSTRUCTIOR_ID = "instructor_id";
+	public static final String INSTRUCTOR_NAME = "name";
+	public static final String INSTRUCTOR_PHONE = "phone";
+	public static final String INSTRUCTOR_EMAIL = "email";
+	public static final String INSTRUCTOR_TYPE = "type";
+	
+	public static final String CREATE_TABLE_INSTRUCTORS = "CREATE TABLE " + TABLE_INSTRUCTORS + "(" +
+			KEY_INSTRUCTIOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "	+
+			INSTRUCTOR_NAME + " TEXT NOT NULL," + 
+			INSTRUCTOR_PHONE + " TEXT NOT NULL," +
+			INSTRUCTOR_EMAIL + " TEXT NOT NULL," +
+			INSTRUCTOR_TYPE + " TEXT DEFAULT 'PROFESSOR' CHECK ( " + INSTRUCTOR_TYPE +" IN ('PROFESSOR','TA')) );";
+	
+	
+	
+	
 	// inserting an instructor goes in addition to adding a record in
 	// the officehours table
 	// The type field in the instructor, defines whether

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.ids.database.dao.InstructorsDAO;
 import com.ids.database.dao.UsersDAO;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
@@ -27,13 +28,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(UsersDAO.CREATE_TABLE_USERS);		
+		db.execSQL(InstructorsDAO.CREATE_TABLE_INSTRUCTORS);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + UsersDAO.TABLE_USERS);
- 
+        db.execSQL("DROP TABLE IF EXISTS " + InstructorsDAO.CREATE_TABLE_INSTRUCTORS);
         // create new tables after dropping
         onCreate(db);
 	}
