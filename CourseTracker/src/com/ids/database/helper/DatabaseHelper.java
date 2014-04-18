@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.ids.database.dao.ClassesDAO;
+import com.ids.database.dao.ClassesUsersDAO;
 import com.ids.database.dao.InstructorsDAO;
 import com.ids.database.dao.OfficeHoursDAO;
 import com.ids.database.dao.UsersDAO;
@@ -33,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		db.execSQL(InstructorsDAO.CREATE_TABLE_INSTRUCTORS);
 		db.execSQL(OfficeHoursDAO.CREATE_TABLE_OFFICEHOURS);
 		db.execSQL(ClassesDAO.CREATE_TABLE_CLASSES);
+		db.execSQL(ClassesUsersDAO.CREATE_CLASSES_USERS);
 	}
 
 	@Override
@@ -42,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + InstructorsDAO.CREATE_TABLE_INSTRUCTORS);
         db.execSQL("DROP TABLE IF EXISTS " + OfficeHoursDAO.CREATE_TABLE_OFFICEHOURS);
         db.execSQL("DROP TABLE IF EXISTS " + ClassesDAO.CREATE_TABLE_CLASSES);
+        db.execSQL("DROP TABLE IF EXISTS " + ClassesUsersDAO.CREATE_CLASSES_USERS);
         
         // create new tables after dropping
         onCreate(db);
