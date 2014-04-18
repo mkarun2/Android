@@ -10,7 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.ids.database.helper.DatabaseHelper;
+import com.ids.database.connector.DatabaseHandler;
 import com.ids.database.model.Users;
 
 public  class UsersDAO {
@@ -24,11 +24,11 @@ public  class UsersDAO {
 	private SQLiteDatabase database;
 	
 	// Database handle creator class
-	private DatabaseHelper dbHelper;
+	private DatabaseHandler dbHelper;
 	
 	// current context of the application
 	public UsersDAO(Context context) {
-		dbHelper = new DatabaseHelper(context);
+		dbHelper = new DatabaseHandler(context);
 	}
 	
 	// open the database connection

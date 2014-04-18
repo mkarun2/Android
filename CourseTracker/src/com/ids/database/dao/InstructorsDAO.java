@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.ids.database.helper.DatabaseHelper;
+import com.ids.database.connector.DatabaseHandler;
 
 public class InstructorsDAO {
 	// Table Name
@@ -14,11 +14,11 @@ public class InstructorsDAO {
 	private SQLiteDatabase database;
 
 	// Database handle creator class
-	private DatabaseHelper dbHelper;
+	private DatabaseHandler dbHelper;
 
 	// current context of the application
 	public InstructorsDAO(Context context) {
-		dbHelper = new DatabaseHelper(context);
+		dbHelper = new DatabaseHandler(context);
 	}
 
 	// open the database connection

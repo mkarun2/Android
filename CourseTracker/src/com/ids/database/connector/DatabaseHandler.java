@@ -1,4 +1,4 @@
-package com.ids.database.helper;
+package com.ids.database.connector;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,11 +11,11 @@ import com.ids.database.dao.OfficeHoursDAO;
 import com.ids.database.dao.StudySessionsDAO;
 import com.ids.database.dao.UsersDAO;
 
-public class DatabaseHelper extends SQLiteOpenHelper{
+public class DatabaseHandler extends SQLiteOpenHelper{
 	
 	
 	// Logger string
-	private static final String LOG = "DatabaseHelper";
+	private static final String LOG = "DatabaseHandler";
 
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	
 
 	//Basic constructor that accepts the current view context
-	public DatabaseHelper(Context context) {
+	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
@@ -37,7 +37,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		db.execSQL(ClassesDAO.CREATE_TABLE_CLASSES);
 		db.execSQL(ClassesUsersDAO.CREATE_CLASSES_USERS);
 		db.execSQL(StudySessionsDAO.CREATE_STUDY_SESSIONS_TABLE);
-		
 	}
 
 	@Override
