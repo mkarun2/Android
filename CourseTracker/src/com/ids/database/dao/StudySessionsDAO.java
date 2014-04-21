@@ -44,7 +44,8 @@ public class StudySessionsDAO {
 		buildQueryStatement.append("CREATE TABLE "+TABLE_STUDY_SESSIONS +" (");
 		buildQueryStatement.append(KEY_STUDY_SESSION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,");
 		buildQueryStatement.append(STUDY_DATE +" DATE ,");
-		buildQueryStatement.append(FKEY_CLASS_ID +" INTEGER REFERENCES "+ClassesDAO.TABLE_CLASSES +"( "+ClassesDAO.KEY_CLASS_ID+" ),");
+		buildQueryStatement.append(FKEY_CLASS_ID +" INTEGER REFERENCES "+ClassesDAO.TABLE_CLASSES +"( "+ClassesDAO.KEY_CLASS_ID+" ) " +
+				"ON DELETE CASCADE ON UPDATE CASCADE,");
 		buildQueryStatement.append(NUM_COMPLETED_SESSIONS + " INTEGER );");
 		return buildQueryStatement.toString();
 	}

@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.ids.database.dao.ActivitiesDAO;
 import com.ids.database.dao.ClassesDAO;
 import com.ids.database.dao.ClassesUsersDAO;
 import com.ids.database.dao.InstructorsDAO;
 import com.ids.database.dao.OfficeHoursDAO;
+import com.ids.database.dao.SchedulesDAO;
 import com.ids.database.dao.StudySessionsDAO;
 import com.ids.database.dao.UsersDAO;
 
@@ -37,6 +39,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		db.execSQL(ClassesDAO.CREATE_TABLE_CLASSES);
 		db.execSQL(ClassesUsersDAO.CREATE_CLASSES_USERS);
 		db.execSQL(StudySessionsDAO.CREATE_STUDY_SESSIONS_TABLE);
+		db.execSQL(SchedulesDAO.CREATE_TABLE_SCHEDULE);
+		db.execSQL(ActivitiesDAO.CREATE_TABLE_ACTIVITIES);
 	}
 
 	@Override
@@ -48,6 +52,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + ClassesDAO.TABLE_CLASSES);
         db.execSQL("DROP TABLE IF EXISTS " + ClassesUsersDAO.TABLE_CLASSESUSERS);
         db.execSQL("DROP TABLE IF EXISTS " + StudySessionsDAO.TABLE_STUDY_SESSIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + SchedulesDAO.CREATE_TABLE_SCHEDULE);
+        db.execSQL("DROP TABLE IF EXISTS " + ActivitiesDAO.CREATE_TABLE_ACTIVITIES);
         
         // create new tables after dropping
         onCreate(db);
