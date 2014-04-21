@@ -1,10 +1,13 @@
 package com.ids.database.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ids.database.connector.DatabaseHandler;
+import com.ids.database.model.Activities;
+import com.ids.database.model.Users;
 
 public class ActivitiesDAO {
 	// Table Name
@@ -41,7 +44,7 @@ public class ActivitiesDAO {
 	public static final String GRADE = "grade";
 	public static final String MAX_GRADE = "max_grade";
 	
-public static final String CREATE_TABLE_ACTIVITIES = ActivitiesDAO.createActivityTableScript();
+	public static final String CREATE_TABLE_ACTIVITIES = ActivitiesDAO.createActivityTableScript();
 	
 	private static final String createActivityTableScript(){
 		StringBuilder activityTableScript = new StringBuilder();
@@ -60,4 +63,25 @@ public static final String CREATE_TABLE_ACTIVITIES = ActivitiesDAO.createActivit
 		activityTableScript.append("CONSTRAINT activity_grade_check CHECK ("+GRADE+" <= "+MAX_GRADE+" ));");
 		return activityTableScript.toString();
 	}
+	
+	/*** Database query methods ***/
+	
+	// insert a given a activity object
+		public  long insertUser(Activities activityObj){
+			if(activityObj == null) return (long) -1;
+					
+			ContentValues values = new ContentValues();
+			values.put(FKEY_CLASS_ID, activityObj.getCourse_id());
+	        values.put(ACTIVITY_NAME, activityObj.getActivity_name());
+	        values.put(ACTIVITY_TYPE, activityObj.getActivity_type());
+	        values.put(DUE_DATE, activityObj.getDue_date().toString());
+	        values.put(ACTIVITY_DESCRIPTION, activityObj.getDescription());
+	        values.put(IS_COMPLETED, activityObj.getIs_completed());
+	        values.put(GRADE, activityObj.getGrade());
+	        values.put(MAX_GRADE, activityObj.getMax_grade());
+	        
+			       
+	        // insert row
+	        return database.insert(TABLE_ACTIVITIES, null, values);
+		}
 }

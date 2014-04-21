@@ -1,17 +1,22 @@
 package com.ids.application.Main;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 
 import com.ids.coursetracker.R;
+import com.ids.database.dao.ClassesDAO;
 import com.ids.database.dao.UsersDAO;
-import com.ids.database.model.Users;
+import com.ids.database.model.Classes;
 
 public class MainActivity extends Activity {
 
 	private UsersDAO users_datasource;
+	private ClassesDAO classes_datasource;
+	
 	private static final String LOG = "MainActivity";
 	
 	@Override
@@ -19,17 +24,18 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		
-		users_datasource = new UsersDAO(this);
-		users_datasource.open();
+		classes_datasource = new ClassesDAO(this);
+		classes_datasource.open();
 		
-		Users userObj = new Users("Mohanakrishnakumar","Karunakaran","AVM","High School","Enjoyed");
+		Classes c = new Classes("CS442","DOP","Distributed Object Oriented Programming Using Middleware","LH 208",
+				new Date(),new Date(),2);
 		
-//		if(users_datasource.deleteStudent(4) <= 0)
-//			Log.e(LOG, "Delete Failed");
-//		else
-//			Log.e(LOG, "Delete Success");
+		if(classes_datasource.insertUser(c) <= 0)
+			Log.e(LOG, "Insert Failed");
+		else
+			Log.e(LOG, "Insert Success");
 		
-		users_datasource.close();		
+		classes_datasource.close();		
 	}
 
 	@Override
