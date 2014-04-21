@@ -44,9 +44,8 @@ public class Instructors {
 	public Instructors() {
 	}
 	
-	public Instructors(Integer instructor_id, String name, String phone,String email, String type) {
+	public Instructors(String name, String phone,String email, String type) {
 		super();
-		this.instructor_id = instructor_id;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;

@@ -34,13 +34,12 @@ public class OfficeHours {
 		this.instructor_id = instructor_id;
 	}
 	
-	public OfficeHours(Integer office_id, Date start_time, Date end_time,
-			Integer instructor_id) {
+	public OfficeHours(Date start_time, Date end_time) {
 		super();
-		this.office_id = office_id;
+
 		this.start_time = start_time;
 		this.end_time = end_time;
-		this.instructor_id = instructor_id;
+
 	}
 	
 	public OfficeHours() {
