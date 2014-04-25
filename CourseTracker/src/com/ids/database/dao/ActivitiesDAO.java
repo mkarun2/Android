@@ -1,17 +1,27 @@
 package com.ids.database.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.ids.database.connector.DatabaseHandler;
 import com.ids.database.model.Activities;
+import com.ids.database.model.Users;
 
 public class ActivitiesDAO {
 	// Table Name
 	public static final String TABLE_ACTIVITIES = "activities";
+	
+	private static final String LOG = "UsersDAO";
 
 	// Database handle
 	private SQLiteDatabase database;
@@ -96,5 +106,79 @@ public class ActivitiesDAO {
 		else
 			return c.getCount();
 	}
+	
+	/*
+	 * Delete all activities
+	 * returns the number of rows deleted 
+	 */
+	public int deleteAllActivities() {				
+		return database.delete(TABLE_ACTIVITIES,"1",null);
+    }
+	
+	
+	/*
+	 * Delete a single activity given an activity id
+	 */
+	public int deleteActivity(Integer activity_id) {		
+		if(activity_id == null) return -1;
+		
+		return database.delete(TABLE_ACTIVITIES, KEY_ACTIVITY_ID + " = ?",
+                new String[] { String.valueOf(activity_id) });
+    }
+	
+	public List<Activities> getAllActivities() throws ParseException{
+        List<Activities> activityList = null;
+        String selectQuery = "SELECT  * FROM " + TABLE_ACTIVITIES; 
+        Log.e(LOG, selectQuery); 
+        Cursor c = database.rawQuery(selectQuery, null);
+        
+        if(c == null) return null;
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+        
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+        	activityList = new ArrayList<Activities>();
+            do {
+            	Activities activity = new Activities();
+            	activity.setActivity_id(c.getInt(c.getColumnIndex(KEY_ACTIVITY_ID)));
+            	activity.setActivity_name(c.getString(c.getColumnIndex(ACTIVITY_NAME)));
+            	activity.setActivity_type(c.getString(c.getColumnIndex(ACTIVITY_TYPE)));
+            	activity.setCourse_id(c.getInt(c.getColumnIndex(FKEY_CLASS_ID)));
+            	activity.setDescription(c.getString(c.getColumnIndex(ACTIVITY_DESCRIPTION)));
+            	activity.setDue_date(sdf.parse(c.getString(c.getColumnIndex(DUE_DATE))));
+            	activity.setGrade(c.getDouble(c.getColumnIndex(GRADE)));
+            	activity.setIs_completed(c.getString(c.getColumnIndex(IS_COMPLETED)));
+            	activity.setMax_grade(c.getDouble(c.getColumnIndex(MAX_GRADE)));
+ 
+                // adding to student list
+                activityList.add(activity);
+            } while (c.moveToNext());
+        } 
+        return activityList;
+    }
+
+	public Activities getActivity(Integer activity_id) throws ParseException{
+		if(activity_id == null) return null;		
+        String selectQuery = "SELECT  * FROM " + TABLE_ACTIVITIES + " WHERE " + KEY_ACTIVITY_ID + " = " + activity_id; 
+        Log.e(LOG, "getActivity(Integer activity_id) query : " + selectQuery); 
+        Cursor c = database.rawQuery(selectQuery, null); 
+        Activities activity = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+        if (c != null){
+            c.moveToFirst();  
+            activity = new Activities();
+        	activity.setActivity_id(c.getInt(c.getColumnIndex(KEY_ACTIVITY_ID)));
+        	activity.setActivity_name(c.getString(c.getColumnIndex(ACTIVITY_NAME)));
+        	activity.setActivity_type(c.getString(c.getColumnIndex(ACTIVITY_TYPE)));
+        	activity.setCourse_id(c.getInt(c.getColumnIndex(FKEY_CLASS_ID)));
+        	activity.setDescription(c.getString(c.getColumnIndex(ACTIVITY_DESCRIPTION)));
+        	activity.setDue_date(sdf.parse(c.getString(c.getColumnIndex(DUE_DATE))));
+        	activity.setGrade(c.getDouble(c.getColumnIndex(GRADE)));
+        	activity.setIs_completed(c.getString(c.getColumnIndex(IS_COMPLETED)));
+        	activity.setMax_grade(c.getDouble(c.getColumnIndex(MAX_GRADE)));
+        }   
+        return activity;
+    }
 
 }

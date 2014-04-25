@@ -97,6 +97,18 @@ public  class UsersDAO {
 	}
 	
 	/*
+	 * This method accepts a String sql query and performs the update 
+	 */
+	public int updateStudentWithQuery(String updateQuery) {
+
+		Cursor c = database.rawQuery(updateQuery, null);
+		if (c != null && c.getCount() == 0)
+			return -1;
+		else
+			return c.getCount();
+	}
+	
+	/*
 	 * Delete all students
 	 * returns the number of rows deleted 
 	 */
