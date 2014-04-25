@@ -21,7 +21,7 @@ public class ActivitiesDAO {
 	// Table Name
 	public static final String TABLE_ACTIVITIES = "activities";
 	
-	private static final String LOG = "UsersDAO";
+	private static final String LOG = "ActivitiesDAO";
 
 	// Database handle
 	private SQLiteDatabase database;
