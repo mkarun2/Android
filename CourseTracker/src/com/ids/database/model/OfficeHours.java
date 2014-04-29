@@ -1,14 +1,24 @@
 package com.ids.database.model;
 
-import java.sql.Date;
+import java.util.Date;
+
+
 
 public class OfficeHours {
 	private Integer office_id;
 	private Date start_time;
 	private Date end_time;
 	private Integer instructor_id;
+	private String office_day;
 	
 	
+	
+	public String getOffice_day() {
+		return office_day;
+	}
+	public void setOffice_day(String office_day) {
+		this.office_day = office_day;
+	}
 	public Integer getOffice_id() {
 		return office_id;
 	}
