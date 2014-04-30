@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+    
+    <Button
+        android:id="@+id/butAddEditCLassesStudySessions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Enter and View Classes and Study Sessions" />
+
+    <Button
+        android:id="@+id/butEnterViewInstrTAs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/butAddEditCLassesStudySessions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Enter and View Instructors and TAs" />
+
+    <Button
+        android:id="@+id/butEnterViewClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/butEnterViewInstrTAs"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Enter and View Class Activities" />
+
+    <Button
+        android:id="@+id/butTrackViewKeyOutcomes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/butEnterViewClass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Track and View Key Outcomes" />
+
+    <ImageButton
+        android:id="@+id/imgButStudentProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/butTrackViewKeyOutcomes"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="31dp"
+        android:layout_marginLeft="35dp"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/imgButAboutUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgButStudentProfile"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@+id/imgButStudentProfile"
+        android:src="@android:drawable/btn_star_big_on" />
+
+</RelativeLayout>

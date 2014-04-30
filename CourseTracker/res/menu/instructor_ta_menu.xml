@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+   <item android:id="@id/backToFrame1"
+      android:title="@string/backToFrame1" 
+      android:icon="@android:drawable/ic_menu_add"
+      android:titleCondensed="@string/backToFrame1"></item>
+   <item android:id="@+id/addNewInstructor"
+      android:title="@string/menuitem_new_instructor" 
+      android:icon="@android:drawable/ic_menu_add"
+      android:titleCondensed="@string/menuitem_new_instructor"></item>
+   <item android:id="@+id/showInstructors" 
+      android:titleCondensed="@string/menuitem_show_instructors"
+      android:title="@string/menuitem_show_instructors" 
+      android:icon="@android:drawable/ic_menu_add"></item>
+   <item android:id="@+id/addNewTA"
+      android:titleCondensed="@string/menuitem_new_TA" 
+      android:title="@string/menuitem_new_TA" 
+      android:icon="@android:drawable/ic_menu_add"></item>
+   <item android:id="@+id/showTAs" 
+      android:titleCondensed="@string/menuitem_show_TAs"
+      android:title="@string/menuitem_show_TAs" 
+      android:icon="@android:drawable/ic_menu_add"></item>
+</menu>
