@@ -67,11 +67,11 @@ public class OfficeHoursDAO {
 		public long insertOfficeHours(OfficeHours officeHoursObj) {
 			if (officeHoursObj == null)
 				return (long) -1;
-
+			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm",Locale.US);
 			ContentValues values = new ContentValues();
 			values.put(OFFICE_DAY, officeHoursObj.getOffice_day());
-			values.put(START_TIME, officeHoursObj.getStart_time().toString());
-			values.put(END_TIME, officeHoursObj.getEnd_time().toString());
+			values.put(START_TIME, sdf.format(officeHoursObj.getStart_time()));
+			values.put(END_TIME, sdf.format(officeHoursObj.getEnd_time()));
 			values.put(FKEY_INSTRUCTOR_ID, officeHoursObj.getInstructor_id());
 			
 			// insert row
